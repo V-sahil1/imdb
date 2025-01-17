@@ -19,11 +19,12 @@ function App() {
      let fillterwatchlist = watchlist.filter((movie)=>{
       return movie.id != movObj.id
      })
+     localStorage.setItem("moviesApp", JSON.stringify(fillterwatchlist));
      setWatchlist(fillterwatchlist);
   }
   useEffect(()=>{
     let managethedata= localStorage.getItem('moviesApp')
-      if(!  managethedata){
+      if(!managethedata){
         return
       }
       setWatchlist(JSON.parse(managethedata))
@@ -37,7 +38,7 @@ function App() {
           <Banner/>
            <Movies watchlist={watchlist} handleAddwatchlist={handleAddwatchlist} handlremovefillter={handlremovefillter} />
            </>}/>
-            <Route path="/watchlist" element ={ <Watchlist setWatchlist={setWatchlist} watchlist={watchlist}/>}/>
+            <Route path="/watchlist" element ={ <Watchlist handlremovefillter={handlremovefillter} setWatchlist={setWatchlist} watchlist={watchlist}/>}/>
           
           
         </Routes>

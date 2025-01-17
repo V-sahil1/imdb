@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import genres from '../Utility/Genres'
-function Watchlist({watchlist,setWatchlist}) {
+function Watchlist({watchlist,setWatchlist,handlremovefillter}) {
+  console.log(watchlist)
   let [search,setSearch] = useState('')
   let handlfun  = (e)=>{
     setSearch(e.target.value)
@@ -47,6 +48,8 @@ function Watchlist({watchlist,setWatchlist}) {
                 </th>
               <th>popularity</th>
               <th>genre</th>
+             
+         
             </tr>
           </thead>
           <tbody>
@@ -66,13 +69,22 @@ function Watchlist({watchlist,setWatchlist}) {
               <td>{moviesObj.vote_average}</td>
               <td>{moviesObj.popularity}</td>
               <td>{genres[moviesObj.genre_ids[0]]}</td>
+              <td className="text-red-800"><button onClick={()=>
+       handlremovefillter(moviesObj)
+  }> Delete  </button></td>
+
+         
+
              
             </tr>
             })}
-         
-         
+
+        
           </tbody>
+          <div>
+         </div>
         </table>
+        
       </div>
     </>
   );
