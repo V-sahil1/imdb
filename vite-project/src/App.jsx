@@ -13,7 +13,7 @@ function App() {
     let newWatchlist=[...watchlist,movObj]
     localStorage.setItem('moviesApp',JSON.stringify(newWatchlist))
     setWatchlist(newWatchlist)
-      console.log(newWatchlist);
+      
   }
   function handlremovefillter(movObj){
      let fillterwatchlist = watchlist.filter((movie)=>{
@@ -29,6 +29,7 @@ function App() {
       }
       setWatchlist(JSON.parse(managethedata))
   },[])
+
   return (
     <>
       <BrowserRouter>

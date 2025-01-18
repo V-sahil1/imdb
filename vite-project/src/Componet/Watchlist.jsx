@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import genres from '../Utility/Genres'
 function Watchlist({watchlist,setWatchlist,handlremovefillter}) {
   console.log(watchlist)
   let [search,setSearch] = useState('')
+  let [genrelIst,setGenreList] = useState(['All Genres'])
+  let [curemtGen,setcuremtGen] = useState()
+  let handlefilter = (genre) =>{
+    setcuremtGen(genre)
+  }
+
   let handlfun  = (e)=>{
     setSearch(e.target.value)
 
@@ -22,9 +28,29 @@ function Watchlist({watchlist,setWatchlist,handlremovefillter}) {
     setWatchlist([...sortesdecre])
 
   }
+   useEffect(() =>{
+      let temp = watchlist.map((moviesObj) => {
+        return genres[moviesObj.genre_ids[0]]
+        
+      })
+      temp = new Set(temp)
+      setGenreList(['All Genres',...temp])
+      console.log(temp);
+    },[watchlist])
   
   return (
     <>
+    <div className="flex justify-center flex-wrap m-4 gap-4">
+      {genrelIst.map((genres)=>{
+        return(
+          <div onClick={()=>{handlefilter(genres)}} className={ curemtGen ===genres ? "flex justify-center items-center h-[3rem] w-[9rem]  rounded-xl bg-blue-500 " : "flex justify-center items-center h-[3rem] w-[9rem] bg-gray-400 rounded-xl "}> {genres}</div>
+        )
+        
+
+      })}
+      
+      
+    </div>
       
      
       <div className="my-4 flex justify-center">
@@ -54,6 +80,13 @@ function Watchlist({watchlist,setWatchlist,handlremovefillter}) {
           </thead>
           <tbody>
             {watchlist.filter((moviesObj)=>{
+              if(curemtGen=='All Genres'){
+                return true
+              }
+              else{
+                return genres[moviesObj.genre_ids[0]]==curemtGen;
+              }
+            }).filter((moviesObj)=>{
           
     return  moviesObj.title.toLowerCase().includes(search.toLowerCase())
   }).map((moviesObj)=>{
