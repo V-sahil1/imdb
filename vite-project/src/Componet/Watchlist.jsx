@@ -5,7 +5,7 @@ function Watchlist({ watchlist, setWatchlist, handlremovefillter }) {
   console.log(watchlist);
   let [search, setSearch] = useState("");
   let [genrelIst, setGenreList] = useState(["All Genres"]);
-  let [curemtGen, setcuremtGen] = useState();
+  let [curemtGen, setcuremtGen] = useState("All Genres");
   let handlefilter = (genre) => {
     setcuremtGen(genre);
   };
@@ -45,11 +45,11 @@ function Watchlist({ watchlist, setWatchlist, handlremovefillter }) {
               }}
               className={
                 curemtGen === genres
-                  ? "flex justify-center items-center h-[3rem] w-[9rem]  rounded-xl bg-blue-500 "
-                  : "flex justify-center items-center h-[3rem] w-[9rem] bg-gray-400 rounded-xl "
+                  ? "hover:cursor-pointer flex justify-center items-center h-[3rem] w-[9rem]  rounded-xl bg-blue-500 "
+                  : "flex justify-center items-center h-[3rem] w-[9rem] bg-gray-400 rounded-xl hover:cursor-pointer "
               }
             >
-              {" "}
+             
               {genres}
             </div>
           );
